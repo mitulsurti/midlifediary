@@ -1,20 +1,254 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>MidLife Diary - Mitul Surti</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11100e">
+  <meta name="description" content="MidLife Diary — songs and stories by Mitul Surti. Some feelings find their way into songs.">
+  <meta property="og:title" content="MidLife Diary — Mitul Surti">
+  <meta property="og:description" content="Some feelings find their way into songs.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.midlifediary.in/">
+  <title>MidLife Diary — Mitul Surti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #11100e;
+      --panel: #191714;
+      --panel-soft: #211c16;
+      --ink: #f4ecdf;
+      --muted: #c0b5a5;
+      --dim: #928574;
+      --gold: #c99559;
+      --line: rgba(235, 216, 188, .17);
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+      --script: "Caveat", cursive;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: var(--sans); font-size: 15px; line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+    .shell { width: min(1160px, calc(100% - 56px)); margin-inline: auto; }
+    .topbar {
+      position: absolute; top: 0; left: 0; width: 100%; z-index: 5;
+      border-bottom: 1px solid rgba(255,255,255,.13);
+    }
+    .nav { min-height: 94px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; flex-direction: column; line-height: 1; flex-shrink: 0; }
+    .brand-name { font-family: var(--script); font-size: 39px; letter-spacing: -.8px; font-weight: 500; }
+    .brand-byline { margin-top: 9px; font-size: 9px; letter-spacing: .34em; text-transform: uppercase; color: #c9bba8; }
+    .navlinks { display: flex; align-items: center; gap: clamp(16px, 2.6vw, 34px); color: #e0d7ca; font-size: 12px; }
+    .navlinks a, .footer-links a { transition: color .2s ease; }
+    .navlinks a:hover, .footer-links a:hover { color: var(--gold); }
+    .nav-cta { font-size: 11px; color: var(--ink); border: 1px solid rgba(255,255,255,.3); padding: 7px 12px; border-radius: 99px; white-space: nowrap; }
+    .nav-cta:hover { border-color: var(--gold); color: var(--gold); }
+    .hero {
+      min-height: 720px; display: flex; align-items: center; position: relative; overflow: hidden;
+      background-color: #21170f;
+      /* Unsplash photo used as an atmospheric placeholder. Replace with a custom hero image if desired. */
+      background-image:
+        linear-gradient(90deg, rgba(10,9,8,.97) 0%, rgba(10,9,8,.88) 30%, rgba(10,9,8,.50) 57%, rgba(10,9,8,.18) 100%),
+        linear-gradient(0deg, rgba(14,12,10,.95) 0%, transparent 30%, rgba(14,12,10,.1) 100%),
+        url("https://images.unsplash.com/photo-1455390582262-044cacedbe72?auto=format&fit=crop&w=2200&q=85");
+      background-position: center, center, center 52%;
+      background-size: cover;
+    }
+    .hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 73% 45%, transparent 0%, rgba(0,0,0,.12) 55%, rgba(0,0,0,.36) 100%); }
+    .hero-inner { position: relative; z-index: 1; padding-top: 128px; padding-bottom: 70px; max-width: 690px; margin-left: max(calc((100vw - 1160px)/2), 28px); }
+    .eyebrow { color: var(--gold); font-size: 10px; font-weight: 600; letter-spacing: .27em; line-height: 1.6; text-transform: uppercase; }
+    h1 { margin: 24px 0 22px; max-width: 650px; font: 400 clamp(48px, 6.6vw, 82px)/1.06 var(--serif); letter-spacing: -.045em; }
+    .hero-copy { color: #d5cabb; max-width: 430px; font-size: 15px; line-height: 1.9; }
+    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 13px; margin-top: 31px; }
+    .button { display: inline-flex; gap: 10px; align-items: center; justify-content: center; min-height: 45px; padding: 0 19px; border: 1px solid rgba(201,149,89,.8); border-radius: 99px; font-size: 12px; transition: background .2s ease, color .2s ease, border-color .2s ease; }
+    .button.primary { background: var(--gold); color: #1b130c; border-color: var(--gold); font-weight: 600; }
+    .button:hover { background: #e0b47e; color: #17110b; border-color: #e0b47e; }
+    .button.secondary { color: var(--ink); }
+    .arrow { color: var(--gold); }
+    .section { padding: 84px 0; border-bottom: 1px solid var(--line); }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 31px; }
+    .section-heading h2 { font: 400 clamp(31px, 4vw, 45px)/1.15 var(--serif); margin: 9px 0 0; letter-spacing: -.03em; }
+    .section-heading p { max-width: 380px; color: var(--muted); font-size: 13px; margin: 0; }
+    .release-card { display: grid; grid-template-columns: minmax(240px, 390px) 1fr; gap: clamp(27px, 5vw, 64px); padding: clamp(20px, 3vw, 36px); background: linear-gradient(135deg, #211a13, #151310 70%); border: 1px solid var(--line); }
+    .artwork {
+      aspect-ratio: 1 / 1; width: 100%; overflow: hidden; position: relative; isolation: isolate;
+      background: linear-gradient(180deg, rgba(21,18,14,.04), rgba(14,12,10,.64)), url("https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1000&q=85") center / cover;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+    .artwork::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, transparent 22%, rgba(16,12,8,.55)); }
+    .art-text { position: absolute; inset: auto 18px 23px; text-align: center; text-shadow: 0 2px 12px rgba(0,0,0,.7); }
+    .art-text .script { display: block; font: 500 clamp(27px, 3vw, 40px)/1.08 var(--script); }
+    .art-text small { display: block; margin-top: 14px; font-size: 8px; letter-spacing: .28em; }
+    .release-info { align-self: center; }
+    .release-info h3 { margin: 10px 0 14px; font: 400 clamp(31px, 4vw, 46px)/1.16 var(--serif); letter-spacing: -.035em; }
+    .release-info p { max-width: 560px; color: var(--muted); font-size: 14px; }
+    .meta { color: var(--dim); text-transform: uppercase; letter-spacing: .2em; font-size: 9px; }
+    .listen-links { display: flex; flex-wrap: wrap; gap: 10px; margin: 25px 0 4px; }
+    .listen-links a { padding: 8px 12px; border: 1px solid var(--line); border-radius: 99px; color: #e8ddcd; font-size: 11px; }
+    .listen-links a:hover { border-color: var(--gold); color: var(--gold); }
+    .about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(32px, 8vw, 106px); align-items: center; }
+    .diary-visual {
+      min-height: 390px; position: relative; overflow: hidden; border: 1px solid var(--line);
+      background-color: #292016;
+      background-image: linear-gradient(0deg, rgba(16,13,10,.69), rgba(16,13,10,.03)), url("https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1200&q=85");
+      background-position: center; background-size: cover;
+    }
+    .diary-quote { position: absolute; left: 24px; right: 24px; bottom: 22px; font: 500 37px/1.04 var(--script); color: #f0dfc4; transform: rotate(-3deg); text-shadow: 0 2px 10px #0008; }
+    .about-copy h2 { font: 400 clamp(34px, 4vw, 49px)/1.14 var(--serif); letter-spacing: -.035em; margin: 12px 0 20px; }
+    .about-copy p { color: var(--muted); font-size: 14px; line-height: 1.95; }
+    .signature { display: block; font: 500 35px var(--script); color: var(--gold); margin-top: 18px; }
+    .archive { display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; padding: 24px 0; border-top: 1px solid var(--line); }
+    .archive:last-child { border-bottom: 1px solid var(--line); }
+    .archive small { color: var(--dim); font-size: 9px; text-transform: uppercase; letter-spacing: .2em; }
+    .archive h3 { margin: 5px 0; font: 400 26px var(--serif); }
+    .archive p { margin: 0; color: var(--muted); font-size: 12px; }
+    .archive .number { font: 400 32px var(--serif); color: var(--gold); }
+    .contact { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 55px 0; }
+    .contact h2 { font: 400 clamp(29px, 4vw, 41px)/1.18 var(--serif); margin: 8px 0; }
+    .contact p { color: var(--muted); margin: 0; font-size: 13px; }
+    footer { border-top: 1px solid var(--line); color: var(--dim); font-size: 10px; letter-spacing: .08em; }
+    .footer-inner { padding: 23px 0; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-links { display: flex; gap: 18px; }
+    @media (max-width: 760px) {
+      .shell { width: min(calc(100% - 36px), 600px); }
+      .nav { min-height: 82px; }
+      .brand-name { font-size: 33px; }
+      .navlinks { gap: 15px; font-size: 11px; }
+      .nav-cta { display: none; }
+      .hero { min-height: 700px; background-position: center, center, 59% center; }
+      .hero-inner { padding-top: 130px; margin-left: 18px; margin-right: 18px; }
+      h1 { font-size: clamp(47px, 10vw, 67px); }
+      .hero-copy { max-width: 370px; }
+      .section { padding: 62px 0; }
+      .section-heading { display: block; }
+      .section-heading p { margin-top: 16px; }
+      .release-card { grid-template-columns: 1fr; }
+      .artwork { max-width: 420px; margin-inline: auto; }
+      .about-grid { grid-template-columns: 1fr; }
+      .diary-visual { min-height: 290px; }
+      .contact { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 440px) {
+      .shell { width: calc(100% - 30px); }
+      .nav { gap: 10px; }
+      .brand-name { font-size: 30px; }
+      .brand-byline { letter-spacing: .25em; font-size: 8px; }
+      .navlinks { gap: 12px; }
+      .navlinks a:nth-child(4) { display: none; }
+      .hero { min-height: 675px; }
+      .eyebrow { letter-spacing: .19em; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
 </head>
 <body>
+  <header class="topbar">
+    <div class="shell nav">
+      <a class="brand" href="#home" aria-label="MidLife Diary home">
+        <span class="brand-name">MidLife Diary</span>
+        <span class="brand-byline">Mitul Surti</span>
+      </a>
+      <nav class="navlinks" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#music">Music</a>
+        <a href="#about">About</a>
+        <a href="#notes">Notes</a>
+      </nav>
+      <a class="nav-cta" href="#music">Listen to the music ↗</a>
+    </div>
+  </header>
 
-    <h1></h1>
+  <main>
+    <section class="hero" id="home">
+      <div class="shell hero-inner">
+        <div class="eyebrow">A personal journal by Mitul Surti</div>
+        <h1>Some feelings<br>find their way<br>into songs.</h1>
+        <p class="hero-copy">A man in midlife, turning the pages of his diary and sharing the songs shaped by life, love, memory and the people around him.</p>
+        <div class="actions">
+          <a class="button primary" href="#music"><span aria-hidden="true">▶</span> Discover the music</a>
+          <a class="button secondary" href="#about">A little about me <span class="arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
 
-    <h2>About</h2>
-    <p> I'm a man in his midlife, turning the pages of my diary and sharing them with the world through songs.
-My music is a reflection of life through my eyes — the emotions, relationships, people, and moments that make us who we are. Rooted in a sense of belonging and the connections we share, these songs are little pieces of my life, put to melody.
-A life, a diary, a few songs. Maybe a story that feels like yours, too.
-— Mitul Surti</p>
+    <section class="section" id="music">
+      <div class="shell">
+        <div class="section-heading">
+          <div><div class="eyebrow">The first release · 01</div><h2>A song from the diary.</h2></div>
+          <p>Some connections stay with us long after a moment has passed. This song is about that quiet kind of presence.</p>
+        </div>
+        <article class="release-card">
+          <div class="artwork" role="img" aria-label="Warm golden-hour landscape as a visual for the featured release">
+            <div class="art-text"><span class="script">Mujh Mein Rehne Laga</span><small>MIDLIFE DIARY</small></div>
+          </div>
+          <div class="release-info">
+            <div class="meta">Latest release · Hindi indie-pop</div>
+            <h3>Mujh Mein Rehne Laga</h3>
+            <p>A heartfelt song about the quiet ways someone becomes a part of you — finding a home in your thoughts, your everyday moments, and the way you experience life.</p>
+            <p>Written and composed by Mitul Surti.</p>
+            <div class="listen-links" aria-label="Listen to the single">
+              <a href="https://music.youtube.com/watch?v=Qm2Z_CIrpNg&amp;si=r6GMPWe-IOCyVKIl" target="_blank" rel="noopener noreferrer">YouTube Music ↗</a>
+              <a href="https://open.spotify.com/search/Mujh%20Mein%20Rehne%20Laga%20Mitul%20Surti" target="_blank" rel="noopener noreferrer">Find on Spotify ↗</a>
+              <a href="https://gaana.com/search/mujh%20mein%20rehne%20laga%20mitul%20surti" target="_blank" rel="noopener noreferrer">Find on Gaana ↗</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
 
-    <h2>Contact</h2>
-    <p>midlifediary@gmail.com</p>
+    <section class="section" id="about">
+      <div class="shell about-grid">
+        <div class="diary-visual" role="img" aria-label="Warm journal and notebook-inspired photograph">
+          <div class="diary-quote">Some people.<br>Some feelings.<br>Some songs.</div>
+        </div>
+        <div class="about-copy">
+          <div class="eyebrow">The story behind the name</div>
+          <h2>A diary, opened to the world.</h2>
+          <p>I'm a man in midlife, turning the pages of my diary and sharing the songs I find there.</p>
+          <p>My music is a reflection of life through my eyes — the emotions, relationships, people and moments that make us who we are. Rooted in belonging and the connections we share, these songs are little pieces of life, put to melody.</p>
+          <p>A life, a diary, a few songs. Maybe a story that feels like yours, too.</p>
+          <span class="signature">Mitul Surti</span>
+        </div>
+      </div>
+    </section>
 
+    <section class="section" id="notes">
+      <div class="shell">
+        <div class="section-heading">
+          <div><div class="eyebrow">The archive</div><h2>Songs &amp; notes.</h2></div>
+          <p>A growing collection of releases and the stories behind them. Every song has a page in the diary.</p>
+        </div>
+        <a class="archive" href="#music">
+          <div><small>01 · October 2026 · Single</small><h3>Mujh Mein Rehne Laga</h3><p>A song about the people who become a part of us.</p></div>
+          <span class="number" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="shell contact" id="contact">
+      <div><div class="eyebrow">Stay in touch</div><h2>Every diary has another page.</h2><p>For notes, thoughts, or simply to say hello.</p></div>
+      <a class="button secondary" href="mailto:midlifediary@gmail.com">Write to me <span class="arrow" aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <span>© <span id="year">2026</span> MIDLIFE DIARY · MITUL SURTI</span>
+      <div class="footer-links"><a href="#home">Back to top ↑</a><a href="mailto:midlifediary@gmail.com">Contact</a></div>
+    </div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>
